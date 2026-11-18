@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import picture %}
+{% block title %}Minhas doações{% endblock %}
+{% block breadcrumb %}Gerenciar meus anúncios{% endblock %}
+{% block content %}
+<div class="page-heading"><div><span class="section-eyebrow">SEU IMPACTO SOCIAL</span><h1>Minhas doações</h1><p>Gerencie seus objetos, veja solicitações e confirme entregas.</p></div><a class="btn btn-primary" href="{{ url_for('new_donation') }}">＋ Nova doação</a></div>
+{% if items %}
+<div class="manage-list">
+  {% for item in items %}<article class="manage-card"><a href="{{ url_for('detail', donation_id=item['id']) }}" class="manage-thumb">{{ picture(item) }}</a><div class="manage-info"><span class="item-category">{{ item['category'] }}</span><h3><a href="{{ url_for('detail', donation_id=item['id']) }}">{{ item['title'] }}</a></h3><p>⌖ {{ item['city'] }} • {{ item['state'] }}</p><div class="tag-row"><span class="status-pill status-{{ item['status'] }}">{{ item['status']|capitalize }}</span>{% if item['pending_count'] %}<span class="pending-chip">{{ item['pending_count'] }} solicitação(ões) pendente(s)</span>{% endif %}</div></div>
+  <div class="manage-actions">
+    {% if item['status']=='disponivel' %}<a class="btn btn-ghost btn-small" href="{{ url_for('edit_donation', donation_id=item['id']) }}">Editar</a><form method="post" action="{{ url_for('delete_donation', donation_id=item['id']) }}" data-confirm="Excluir este anúncio e suas solicitações?"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn btn-danger btn-small">Excluir</button></form>{% endif %}
+    {% if item['pending_count'] %}<a class="btn btn-primary btn-small" href="{{ url_for('requests_page') }}">Ver pedidos</a>{% endif %}
+    {% if item['status']=='reservado' %}<form method="post" action="{{ url_for('complete_donation', donation_id=item['id']) }}" data-confirm="Confirma que o objeto já foi entregue à pessoa selecionada?"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn btn-primary btn-small">Confirmar entrega ✓</button></form>{% endif %}
+    {% if item['status']=='doado' %}<span class="delivered-label">♥ Obrigado por doar!</span>{% endif %}
+  </div></article>{% endfor %}
+</div>
+{% else %}<div class="empty-state"><span>📦</span><h3>Você ainda não publicou nenhuma doação.</h3><p>Seu primeiro anúncio pode fazer a diferença na vida de alguém.</p><a class="btn btn-primary" href="{{ url_for('new_donation') }}">Publicar meu primeiro item →</a></div>{% endif %}
+{% endblock %}

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420" role="img" aria-label="Ilustração de luminaria">
+ <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#E1E9F1"/><stop offset="1" stop-color="#BACBD8"/></linearGradient></defs>
+ <rect width="640" height="420" fill="url(#bg)"/><circle cx="540" cy="65" r="110" fill="white" opacity=".22"/><circle cx="70" cy="355" r="100" fill="white" opacity=".17"/>
+ <g transform="translate(142 68)"><ellipse cx="173" cy="316" rx="152" ry="18" fill="#94ABB3" opacity=".3"/><path d="M167 103l94 133" stroke="#597588" stroke-width="17" stroke-linecap="round"/><circle cx="167" cy="103" r="19" fill="#3B6178"/><path d="M259 235l-64 70" stroke="#597588" stroke-width="17" stroke-linecap="round"/><path d="M118 90L224 33l42 104-112 23z" fill="#D5AB6E"/><path d="M127 94l98-54" stroke="#F1CB91" stroke-width="9" stroke-linecap="round"/><ellipse cx="183" cy="320" rx="91" ry="18" fill="#44637A"/><rect x="165" y="291" width="35" height="28" rx="9" fill="#638299"/><path d="M155 160q56 33 85 0" stroke="#FFF1C9" stroke-width="10" fill="none" opacity=".75"/></g>
+ </svg>

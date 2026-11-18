@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420" role="img" aria-label="Ilustração de casaco">
+ <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#F1E8F2"/><stop offset="1" stop-color="#E1CDE7"/></linearGradient></defs>
+ <rect width="640" height="420" fill="url(#bg)"/><circle cx="540" cy="65" r="110" fill="white" opacity=".22"/><circle cx="70" cy="355" r="100" fill="white" opacity=".17"/>
+ <g transform="translate(139 73)"><path d="M135 22h87l70 51 58 96-58 34-42-59v194H99V144l-42 59-58-34L56 73z" fill="#B787BA"/><path d="M135 22q13 59 44 64q31-5 43-64" fill="#8D6497"/><path d="M178 84v254" stroke="#D5B5D7" stroke-width="10"/><path d="M104 248h143" stroke="#A275AB" stroke-width="6"/><path d="M111 274h136" stroke="#D5B5D7" stroke-width="4"/><rect x="124" y="195" width="50" height="46" rx="12" fill="#A875AE"/><rect x="184" y="195" width="50" height="46" rx="12" fill="#A875AE"/></g>
+ </svg>

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Administração{% endblock %}
+{% block breadcrumb %}Painel administrativo{% endblock %}
+{% block content %}
+<div class="page-heading"><div><span class="section-eyebrow">ÁREA RESTRITA</span><h1>Administração</h1><p>Visão geral dos cadastros e moderação de anúncios.</p></div><span class="admin-marker">⚙ Acesso de administrador</span></div>
+<div class="stats-grid stats-four">
+  <div class="stat-card"><span class="stat-icon green">♙</span><div><strong>{{ stats.users }}</strong><small>Usuários cadastrados</small></div></div>
+  <div class="stat-card"><span class="stat-icon blue">▦</span><div><strong>{{ stats.donations }}</strong><small>Anúncios publicados</small></div></div>
+  <div class="stat-card"><span class="stat-icon yellow">◷</span><div><strong>{{ stats.pending }}</strong><small>Solicitações pendentes</small></div></div>
+  <div class="stat-card"><span class="stat-icon coral">♥</span><div><strong>{{ stats.completed }}</strong><small>Doações concluídas</small></div></div>
+</div>
+<section class="table-card" id="usuarios"><div class="panel-header"><div><h2>Usuários</h2><p>Ative ou suspenda contas, quando necessário.</p></div><span class="table-count">{{ users|length }} exibidos</span></div>
+<div class="table-scroll"><table><thead><tr><th>Usuário</th><th>E-mail</th><th>Perfil</th><th>Situação</th><th>Ações</th></tr></thead><tbody>{% for u in users %}<tr><td><strong>{{ u['name'] }}</strong><small>{{ u['city'] }}</small></td><td>{{ u['email'] }}</td><td>{{ 'Administrador' if u['role']=='admin' else 'Usuário' }}</td><td><span class="status-pill {{ 'status-disponivel' if u['is_active'] else 'status-recusada' }}">{{ 'Ativo' if u['is_active'] else 'Bloqueado' }}</span></td><td>{% if u['role'] != 'admin' %}<form method="post" action="{{ url_for('admin_toggle_user', user_id=u['id']) }}" data-confirm="Deseja alterar o acesso deste usuário?"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="table-action" type="submit">{{ 'Bloquear' if u['is_active'] else 'Reativar' }}</button></form>{% else %}—{% endif %}</td></tr>{% endfor %}</tbody></table></div>
+</section>
+<section class="table-card" id="anuncios"><div class="panel-header"><div><h2>Moderar anúncios</h2><p>Oculte anúncios indevidos sem apagar o histórico.</p></div><span class="table-count">{{ items|length }} exibidos</span></div>
+<div class="table-scroll"><table><thead><tr><th>Anúncio</th><th>Doador</th><th>Categoria</th><th>Doação</th><th>Visibilidade</th><th>Ações</th></tr></thead><tbody>{% for item in items %}<tr><td><strong><a href="{{ url_for('detail', donation_id=item['id']) }}">{{ item['title'] }}</a></strong><small>{{ item['city'] }} • {{ item['state'] }}</small></td><td>{{ item['owner_name'] }}</td><td>{{ item['category'] }}</td><td><span class="status-pill status-{{ item['status'] }}">{{ item['status']|capitalize }}</span></td><td><span class="status-pill {{ 'status-disponivel' if item['is_visible'] else 'status-recusada' }}">{{ 'Visível' if item['is_visible'] else 'Oculto' }}</span></td><td><form method="post" action="{{ url_for('admin_toggle_donation', donation_id=item['id']) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="table-action" type="submit">{{ 'Ocultar' if item['is_visible'] else 'Mostrar' }}</button></form></td></tr>{% endfor %}</tbody></table></div>
+</section>
+{% endblock %}

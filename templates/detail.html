@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import picture %}
+{% block title %}{{ item['title'] }}{% endblock %}
+{% block breadcrumb %}Detalhes da doação{% endblock %}
+{% block content %}
+<a href="{{ url_for('explore') }}" class="back-link">← Voltar às doações</a>
+<div class="detail-grid"><div class="detail-photo">{{ picture(item) }}</div><section class="detail-panel"><div class="detail-pills"><span class="category-pill">{{ item['category'] }}</span><span class="status-pill status-{{ item['status'] }}">{{ item['status']|capitalize }}</span></div><h1>{{ item['title'] }}</h1><p class="detail-location">⌖ {{ item['city'] }} • {{ item['state'] }}</p>
+  <h3>Sobre este item</h3><p class="detail-description">{{ item['description'] }}</p>
+  <div class="detail-facts"><div><small>Conservação</small><strong>{{ item['item_condition'] }}</strong></div><div><small>Publicado por</small><strong>{{ item['owner_name'] }}</strong></div><div><small>Tipo</small><strong>Doação gratuita</strong></div></div>
+  <div class="detail-actions">
+    {% if current_user and current_user['id'] == item['owner_id'] %}
+      <div class="inline-message">Este é o seu anúncio. Você pode gerenciá-lo no seu painel.</div><a class="btn btn-primary btn-block" href="{{ url_for('mine') }}">Gerenciar meu anúncio →</a>
+    {% elif item['status'] != 'disponivel' %}
+      <div class="inline-message">Este item já foi reservado ou doado.</div>
+    {% elif my_request and my_request['status'] != 'cancelada' %}
+      <div class="inline-message">Você já solicitou este objeto. Situação: <b>{{ my_request['status']|capitalize }}</b>.</div><a class="btn btn-primary btn-block" href="{{ url_for('requests_page') }}">Acompanhar solicitação →</a>
+    {% elif current_user %}
+      <form method="post" action="{{ url_for('request_donation', donation_id=item['id']) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn btn-primary btn-lg btn-block" type="submit">♥ Tenho interesse neste item</button></form>
+    {% else %}
+      <a class="btn btn-primary btn-lg btn-block" href="{{ url_for('login') }}">Entre para solicitar esta doação →</a>
+    {% endif %}
+    <p class="tiny-note">Sem pagamentos ou entregas pela plataforma. O contato é liberado após a aprovação da solicitação.</p>
+  </div>
+</section></div>
+{% endblock %}

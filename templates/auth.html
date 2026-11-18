@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Criar conta' if mode == 'register' else 'Entrar' }}{% endblock %}
+{% block breadcrumb %}{{ 'Criar minha conta' if mode == 'register' else 'Acessar minha conta' }}{% endblock %}
+{% block content %}
+<div class="auth-layout"><section class="auth-panel"><div class="auth-badge">♥ FAÇA PARTE DESSA CORRENTE</div>
+  <h1>{{ 'Sua próxima boa ação começa aqui.' if mode == 'register' else 'Bom ter você de volta!' }}</h1>
+  <p class="auth-intro">{{ 'Crie sua conta gratuitamente para compartilhar objetos e participar de doações.' if mode == 'register' else 'Entre para acompanhar suas doações e solicitações.' }}</p>
+  <form method="post" class="form-stack" action="{{ url_for('register') if mode == 'register' else url_for('login') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    {% if mode == 'register' %}
+      <div class="field"><label for="name">Nome completo</label><input id="name" name="name" required minlength="2" maxlength="80" autocomplete="name" placeholder="Como podemos chamar você?" value="{{ request.form.get('name','') }}"></div>
+      <div class="field"><label for="city">Sua cidade</label><input id="city" name="city" required minlength="2" maxlength="80" placeholder="Ex.: Belém" value="{{ request.form.get('city','') }}"></div>
+    {% endif %}
+    <div class="field"><label for="email">E-mail</label><input id="email" type="email" name="email" required maxlength="150" autocomplete="email" placeholder="voce@exemplo.com" value="{{ request.form.get('email','') }}"></div>
+    <div class="field"><label for="password">Senha</label><input id="password" name="password" type="password" required {% if mode == 'register' %}minlength="8" maxlength="128" autocomplete="new-password"{% else %}autocomplete="current-password"{% endif %} placeholder="{{ 'Mínimo de 8 caracteres' if mode == 'register' else 'Sua senha' }}"></div>
+    {% if mode == 'register' %}<p class="form-note">Ao participar, você concorda que seu e-mail será compartilhado com a outra pessoa <strong>somente após a aprovação de uma solicitação</strong>, para combinar a retirada do objeto.</p>{% endif %}
+    <button class="btn btn-primary btn-block btn-lg" type="submit">{{ 'Criar minha conta →' if mode == 'register' else 'Entrar na minha conta →' }}</button>
+  </form>
+  <p class="auth-switch">{% if mode == 'register' %}Já possui uma conta? <a href="{{ url_for('login') }}">Entrar</a>{% else %}Ainda não tem uma conta? <a href="{{ url_for('register') }}">Cadastre-se gratuitamente</a>{% endif %}</p>
+</section><aside class="auth-art"><div class="auth-art-emblem">🎁</div><h2>Coisas boas merecem circular.</h2><p>Um item compartilhado pode facilitar o dia, despertar um sorriso e abrir novas possibilidades.</p><div class="auth-art-tag">♥ Doe • Conecte • Transforme</div></aside></div>
+{% endblock %}

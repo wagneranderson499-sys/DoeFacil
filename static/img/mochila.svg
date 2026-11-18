@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420" role="img" aria-label="Ilustração de mochila">
+ <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#D9EFE8"/><stop offset="1" stop-color="#A9D7C5"/></linearGradient></defs>
+ <rect width="640" height="420" fill="url(#bg)"/><circle cx="540" cy="65" r="110" fill="white" opacity=".22"/><circle cx="70" cy="355" r="100" fill="white" opacity=".17"/>
+ <g transform="translate(145 65)"><path d="M111 85v-21c0-68 115-68 115 0v21" fill="none" stroke="#315F67" stroke-width="21" stroke-linecap="round"/><path d="M55 135C55 81 98 56 165 56s113 30 113 79v173H55z" fill="#31688A"/><rect x="95" y="86" width="144" height="160" rx="29" fill="#3C86AD"/><path d="M113 188h109a19 19 0 0 1 19 19v69H94v-69a19 19 0 0 1 19-19" fill="#2A607F"/><path d="M135 188v46M200 188v46" stroke="#D1E4DB" stroke-width="10" stroke-linecap="round"/><rect x="128" y="121" width="76" height="15" rx="7.5" fill="#A9D8E7"/></g>
+ </svg>

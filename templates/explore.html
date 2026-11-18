@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import card %}
+{% block title %}Explorar doações{% endblock %}
+{% block breadcrumb %}Explorar doações{% endblock %}
+{% block content %}
+<div class="page-heading"><div><span class="section-eyebrow">ENCONTRE, COMPARTILHE, TRANSFORME</span><h1>Explorar doações</h1><p>Descubra objetos que estão esperando um novo lar.</p></div><a class="btn btn-primary" href="{{ url_for('new_donation') }}">＋ Nova doação</a></div>
+<form class="filter-panel" method="get" action="{{ url_for('explore') }}">
+  <label class="search-wrap"><span>⌕</span><input type="search" name="q" value="{{ q }}" placeholder="Buscar por item, descrição..." aria-label="Buscar item"></label>
+  <label class="select-wrap"><span class="visually-hidden">Categoria</span><select name="categoria"><option value="">Todas as categorias</option>{% for c in categories %}<option value="{{ c }}" {% if selected_category == c %}selected{% endif %}>{{ c }}</option>{% endfor %}</select></label>
+  <label class="city-wrap"><span class="visually-hidden">Cidade</span><input type="text" name="cidade" value="{{ selected_city }}" placeholder="Cidade" maxlength="80"></label>
+  <button class="btn btn-primary" type="submit">Filtrar</button>
+  {% if q or selected_category or selected_city %}<a class="btn btn-ghost" href="{{ url_for('explore') }}">Limpar</a>{% endif %}
+</form>
+<div class="results-heading"><strong>{{ items|length }} {{ 'item encontrado' if items|length == 1 else 'itens encontrados' }}</strong><span>Itens disponíveis • entrega combinada entre as pessoas</span></div>
+{% if items %}<div class="items-grid">{% for item in items %}{{ card(item) }}{% endfor %}</div>{% else %}<div class="empty-state"><span>🔎</span><h3>Nenhuma doação encontrada</h3><p>Tente alterar a busca ou explore todas as categorias.</p><a class="btn btn-primary" href="{{ url_for('explore') }}">Ver todas as doações</a></div>{% endif %}
+{% endblock %}

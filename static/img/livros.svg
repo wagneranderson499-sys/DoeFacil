@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420" role="img" aria-label="Ilustração de livros">
+ <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#F1EBD9"/><stop offset="1" stop-color="#DCC7A4"/></linearGradient></defs>
+ <rect width="640" height="420" fill="url(#bg)"/><circle cx="540" cy="65" r="110" fill="white" opacity=".22"/><circle cx="70" cy="355" r="100" fill="white" opacity=".17"/>
+ <g transform="translate(124 110)"><rect x="45" y="151" width="286" height="45" rx="8" fill="#C9875E"/><rect x="54" y="159" width="278" height="28" rx="5" fill="#FAF6E6"/><rect x="76" y="92" width="262" height="47" rx="7" transform="rotate(-7 76 92)" fill="#639C87"/><rect x="86" y="100" width="244" height="27" rx="5" transform="rotate(-7 86 100)" fill="#F9F3E2"/><rect x="56" y="34" width="277" height="43" rx="8" fill="#446F9B"/><rect x="63" y="43" width="262" height="24" rx="5" fill="#F7F3E8"/><rect x="56" y="205" width="281" height="41" rx="8" fill="#A65E63"/><rect x="64" y="214" width="263" height="23" rx="5" fill="#F8F1E7"/></g>
+ </svg>
