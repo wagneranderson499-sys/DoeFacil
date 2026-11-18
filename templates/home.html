@@ -10,7 +10,7 @@
     <p>Doe objetos que não usa, encontre o que precisa e faça parte de uma corrente de solidariedade.</p>
     <div class="hero-buttons"><a class="btn btn-light" href="{{ url_for('explore') }}">Explorar doações <span>↗</span></a><a class="btn btn-hero-outline" href="{{ url_for('new_donation') }}">Quero doar algo →</a></div>
   </div>
-  <div class="hero-visual" aria-hidden="true"><img class="hero-artwork" src="{{ url_for('static', filename='img/hero-doacao.svg') }}" alt=""><div class="floating-label label-top">{{ icon('heart') }} Pequenos gestos</div><div class="floating-label label-bottom">Grandes mudanças</div></div>
+  <div class="hero-visual" aria-hidden="true"><img class="hero-artwork" src="{{ 'img/hero-doacao.svg'|photo_url }}" alt=""><div class="floating-label label-top">{{ icon('heart') }} Pequenos gestos</div><div class="floating-label label-bottom">Grandes mudanças</div></div>
 </section>
 <section class="stats-grid" aria-label="Números da plataforma">
   <div class="stat-card"><span class="stat-icon green">{{ icon('grid') }}</span><div><strong>{{ counts.available }}</strong><small>Doações disponíveis</small></div></div>
@@ -19,8 +19,8 @@
 </section>
 <div class="section-heading"><div><span class="section-eyebrow">ESCOLHA POR CATEGORIA</span><h2>O que você está procurando?</h2><p>Uma boa oportunidade de dar uma nova história a cada objeto.</p></div></div>
 <div class="category-grid">
-  {% for category, imagem in [('Roupas','casaco.svg'),('Livros','livros.svg'),('Brinquedos','urso.svg'),('Material escolar','cadernos.svg'),('Casa','luminaria.svg'),('Eletrônicos','celular.svg')] %}
-  <a href="{{ url_for('explore', categoria=category) }}" class="category-tile"><img class="category-photo" src="{{ url_for('static', filename='img/' ~ imagem) }}" alt="" loading="lazy"><strong>{{ category }}</strong><small>Ver doações {{ icon('arrow-up-right') }}</small></a>
+  {% for category, imagem in [('Roupas','img/casaco.svg'),('Livros','img/livros.svg'),('Brinquedos','img/urso.svg'),('Material escolar','img/cadernos.svg'),('Casa','img/luminaria.svg'),('Eletrônicos','img/celular.svg')] %}
+  <a href="{{ url_for('explore', categoria=category) }}" class="category-tile"><img class="category-photo" src="{{ imagem|photo_url }}" alt="" loading="lazy"><strong>{{ category }}</strong><small>Ver doações {{ icon('arrow-up-right') }}</small></a>
   {% endfor %}
 </div>
 <div class="section-heading section-split"><div><span class="section-eyebrow">FEITAS PARA ENCONTRAR NOVOS LARES</span><h2>Doações recentes</h2><p>Itens publicados por pessoas da comunidade.</p></div><a class="text-action" href="{{ url_for('explore') }}">Ver todas as doações <span>→</span></a></div>
