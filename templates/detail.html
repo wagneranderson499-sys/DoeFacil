@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
-{% from 'macros.html' import picture %}
+{% from 'macros.html' import picture, icon %}
 {% block title %}{{ item['title'] }}{% endblock %}
 {% block breadcrumb %}Detalhes da doação{% endblock %}
 {% block content %}
 <a href="{{ url_for('explore') }}" class="back-link">← Voltar às doações</a>
-<div class="detail-grid"><div class="detail-photo">{{ picture(item) }}</div><section class="detail-panel"><div class="detail-pills"><span class="category-pill">{{ item['category'] }}</span><span class="status-pill status-{{ item['status'] }}">{{ item['status']|capitalize }}</span></div><h1>{{ item['title'] }}</h1><p class="detail-location">⌖ {{ item['city'] }} • {{ item['state'] }}</p>
+<div class="detail-grid"><div class="detail-photo">{{ picture(item) }}</div><section class="detail-panel"><div class="detail-pills"><span class="category-pill">{{ item['category'] }}</span><span class="status-pill status-{{ item['status'] }}">{{ item['status']|capitalize }}</span></div><h1>{{ item['title'] }}</h1><p class="detail-location">{{ icon('map-pin') }} {{ item['city'] }} • {{ item['state'] }}</p>
   <h3>Sobre este item</h3><p class="detail-description">{{ item['description'] }}</p>
   <div class="detail-facts"><div><small>Conservação</small><strong>{{ item['item_condition'] }}</strong></div><div><small>Publicado por</small><strong>{{ item['owner_name'] }}</strong></div><div><small>Tipo</small><strong>Doação gratuita</strong></div></div>
   <div class="detail-actions">
@@ -15,7 +15,7 @@
     {% elif my_request and my_request['status'] != 'cancelada' %}
       <div class="inline-message">Você já solicitou este objeto. Situação: <b>{{ my_request['status']|capitalize }}</b>.</div><a class="btn btn-primary btn-block" href="{{ url_for('requests_page') }}">Acompanhar solicitação →</a>
     {% elif current_user %}
-      <form method="post" action="{{ url_for('request_donation', donation_id=item['id']) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn btn-primary btn-lg btn-block" type="submit">♥ Tenho interesse neste item</button></form>
+      <form method="post" action="{{ url_for('request_donation', donation_id=item['id']) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn btn-primary btn-lg btn-block" type="submit">{{ icon('heart') }} Tenho interesse neste item</button></form>
     {% else %}
       <a class="btn btn-primary btn-lg btn-block" href="{{ url_for('login') }}">Entre para solicitar esta doação →</a>
     {% endif %}
