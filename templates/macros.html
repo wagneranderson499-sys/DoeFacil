@@ -4,9 +4,9 @@
 
 {% macro picture(item, extra_class='') -%}
   {% if item['image_path'] %}
-    <img class="{{ extra_class }}" src="{{ url_for('static', filename=item['image_path']) }}" alt="Imagem de {{ item['title'] }}" loading="lazy">
+    <img class="{{ extra_class }}" src="{{ item['image_path']|photo_url }}" alt="Imagem de {{ item['title'] }}" loading="lazy">
   {% else %}
-    <img class="photo-empty {{ extra_class }}" src="{{ url_for('static', filename='img/item-sem-foto.svg') }}" alt="Foto não enviada para {{ item['title'] }}" loading="lazy">
+    <div class="photo-empty photo-unavailable {{ extra_class }}" role="img" aria-label="Foto não enviada para {{ item['title'] }}"><small>Foto não enviada</small></div>
   {% endif %}
 {%- endmacro %}
 
