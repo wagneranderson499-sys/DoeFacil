@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
+{% from 'macros.html' import icon %}
 {% block title %}{{ 'Criar conta' if mode == 'register' else 'Entrar' }}{% endblock %}
 {% block breadcrumb %}{{ 'Criar minha conta' if mode == 'register' else 'Acessar minha conta' }}{% endblock %}
 {% block content %}
-<div class="auth-layout"><section class="auth-panel"><div class="auth-badge">♥ FAÇA PARTE DESSA CORRENTE</div>
+<div class="auth-layout"><section class="auth-panel"><div class="auth-badge">{{ icon('heart') }} FAÇA PARTE DESSA CORRENTE</div>
   <h1>{{ 'Sua próxima boa ação começa aqui.' if mode == 'register' else 'Bom ter você de volta!' }}</h1>
   <p class="auth-intro">{{ 'Crie sua conta gratuitamente para compartilhar objetos e participar de doações.' if mode == 'register' else 'Entre para acompanhar suas doações e solicitações.' }}</p>
   <form method="post" class="form-stack" action="{{ url_for('register') if mode == 'register' else url_for('login') }}">
@@ -17,5 +18,5 @@
     <button class="btn btn-primary btn-block btn-lg" type="submit">{{ 'Criar minha conta →' if mode == 'register' else 'Entrar na minha conta →' }}</button>
   </form>
   <p class="auth-switch">{% if mode == 'register' %}Já possui uma conta? <a href="{{ url_for('login') }}">Entrar</a>{% else %}Ainda não tem uma conta? <a href="{{ url_for('register') }}">Cadastre-se gratuitamente</a>{% endif %}</p>
-</section><aside class="auth-art"><div class="auth-art-emblem">🎁</div><h2>Coisas boas merecem circular.</h2><p>Um item compartilhado pode facilitar o dia, despertar um sorriso e abrir novas possibilidades.</p><div class="auth-art-tag">♥ Doe • Conecte • Transforme</div></aside></div>
+</section><aside class="auth-art"><img class="auth-art-image" src="{{ url_for('static', filename='img/hero-doacao.svg') }}" alt="Ilustração de objetos sendo doados"><h2>Coisas boas merecem circular.</h2><p>Um item compartilhado pode facilitar o dia, despertar um sorriso e abrir novas possibilidades.</p><div class="auth-art-tag">{{ icon('heart') }} Doe • Conecte • Transforme</div></aside></div>
 {% endblock %}
