@@ -2,6 +2,10 @@
 
 Um sistema web de doações de objetos entre pessoas, criado como projeto acadêmico. O protótipo HTML anterior foi transformado em um **sistema com back-end real**, banco de dados local, cadastro, login, fotos e fluxo de solicitações.
 
+## Atualização visual: fotos reais
+
+Os anúncios fictícios, as categorias, a página inicial e a área de login usam **fotografias reais** disponibilizadas no Unsplash, em vez de desenhos SVG. As imagens dependem de internet, mas as fotos que os usuários enviarem continuarão guardadas e exibidas localmente. O banco SQLite existente não precisa ser apagado. Veja [créditos e fontes das fotografias](CREDITOS_FOTOS.md).
+
 ## Tecnologias
 
 - **Python + Flask**: rotas, autenticação, validações e regras de negócio.
