@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
-{% from 'macros.html' import card, picture %}
+{% from 'macros.html' import card, picture, icon %}
 {% block title %}Meu painel{% endblock %}
 {% block breadcrumb %}Visão geral da minha conta{% endblock %}
 {% block content %}
-<div class="page-heading"><div><span class="section-eyebrow">PAINEL DO USUÁRIO</span><h1>Olá, {{ current_user['name'].split(' ')[0] }}! <span class="wave">👋</span></h1><p>Acompanhe o impacto das suas doações e suas solicitações.</p></div><a class="btn btn-primary" href="{{ url_for('new_donation') }}">＋ Publicar doação</a></div>
+<div class="page-heading"><div><span class="section-eyebrow">PAINEL DO USUÁRIO</span><h1>Olá, {{ current_user['name'].split(' ')[0] }}! <span class="wave">{{ icon('sparkles') }}</span></h1><p>Acompanhe o impacto das suas doações e suas solicitações.</p></div><a class="btn btn-primary" href="{{ url_for('new_donation') }}">{{ icon('plus') }} Publicar doação</a></div>
 <div class="stats-grid stats-four">
-  <a class="stat-card" href="{{ url_for('mine') }}"><span class="stat-icon green">▤</span><div><strong>{{ counts.my_donations }}</strong><small>Meus anúncios</small></div></a>
-  <a class="stat-card" href="{{ url_for('requests_page') }}"><span class="stat-icon blue">↗</span><div><strong>{{ counts.my_pending }}</strong><small>Pedidos enviados</small></div></a>
-  <a class="stat-card" href="{{ url_for('requests_page') }}"><span class="stat-icon yellow">♡</span><div><strong>{{ counts.received_pending }}</strong><small>Pedidos recebidos</small></div></a>
-  <a class="stat-card" href="{{ url_for('mine') }}"><span class="stat-icon coral">✓</span><div><strong>{{ counts.my_completed }}</strong><small>Doações concluídas</small></div></a>
+  <a class="stat-card" href="{{ url_for('mine') }}"><span class="stat-icon green">{{ icon('package') }}</span><div><strong>{{ counts.my_donations }}</strong><small>Meus anúncios</small></div></a>
+  <a class="stat-card" href="{{ url_for('requests_page') }}"><span class="stat-icon blue">{{ icon('arrow-up-right') }}</span><div><strong>{{ counts.my_pending }}</strong><small>Pedidos enviados</small></div></a>
+  <a class="stat-card" href="{{ url_for('requests_page') }}"><span class="stat-icon yellow">{{ icon('heart') }}</span><div><strong>{{ counts.received_pending }}</strong><small>Pedidos recebidos</small></div></a>
+  <a class="stat-card" href="{{ url_for('mine') }}"><span class="stat-icon coral">{{ icon('check') }}</span><div><strong>{{ counts.my_completed }}</strong><small>Doações concluídas</small></div></a>
 </div>
 <div class="panel-grid"><section class="panel-card"><div class="panel-header"><div><h2>Minhas últimas doações</h2><p>Seus anúncios recentes e suas situações.</p></div><a class="text-action" href="{{ url_for('mine') }}">Ver todas →</a></div>
-  {% if recent %}<div class="list-rows">{% for item in recent %}<a class="list-row" href="{{ url_for('detail', donation_id=item['id']) }}"><div class="tiny-photo">{{ picture(item) }}</div><div class="list-row-text"><strong>{{ item['title'] }}</strong><small>{{ item['category'] }} • {{ item['city'] }}</small></div><span class="status-pill status-{{ item['status'] }}">{{ item['status']|capitalize }}</span></a>{% endfor %}</div>{% else %}<div class="small-empty"><span>📦</span><p>Você ainda não publicou nenhuma doação.</p><a href="{{ url_for('new_donation') }}">Publicar agora →</a></div>{% endif %}
-</section><aside class="panel-aside"><div class="highlight-icon">💌</div><h2>Uma doação pode começar por você.</h2><p>Que tal olhar ao redor e escolher um objeto que ainda está em bom estado, mas não é mais utilizado?</p><a class="btn btn-light" href="{{ url_for('new_donation') }}">Quero doar →</a></aside></div>
+  {% if recent %}<div class="list-rows">{% for item in recent %}<a class="list-row" href="{{ url_for('detail', donation_id=item['id']) }}"><div class="tiny-photo">{{ picture(item) }}</div><div class="list-row-text"><strong>{{ item['title'] }}</strong><small>{{ item['category'] }} • {{ item['city'] }}</small></div><span class="status-pill status-{{ item['status'] }}">{{ item['status']|capitalize }}</span></a>{% endfor %}</div>{% else %}<div class="small-empty"><span>{{ icon('package') }}</span><p>Você ainda não publicou nenhuma doação.</p><a href="{{ url_for('new_donation') }}">Publicar agora →</a></div>{% endif %}
+</section><aside class="panel-aside"><div class="highlight-icon">{{ icon('hand-heart') }}</div><h2>Uma doação pode começar por você.</h2><p>Que tal olhar ao redor e escolher um objeto que ainda está em bom estado, mas não é mais utilizado?</p><a class="btn btn-light" href="{{ url_for('new_donation') }}">Quero doar →</a></aside></div>
 {% endblock %}
