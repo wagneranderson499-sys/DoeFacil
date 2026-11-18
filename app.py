@@ -37,6 +37,32 @@ app.config.update(
 )
 
 
+# Fotografias reais de demonstração (Unsplash). Os anúncios fictícios antigos
+# ainda guardam caminhos SVG no SQLite; o filtro traduz sem apagar o banco.
+DEMO_PHOTOS = {
+    "img/mochila.svg": "https://images.unsplash.com/photo-1535982330050-f1c2fb79ff78?auto=format&fit=crop&w=1000&q=82",
+    "img/livros.svg": "https://images.unsplash.com/photo-1692742593479-7b37552a4815?auto=format&fit=crop&w=1000&q=82",
+    "img/urso.svg": "https://images.unsplash.com/photo-1765913186506-a4f1ca060ced?auto=format&fit=crop&w=1000&q=82",
+    "img/luminaria.svg": "https://images.unsplash.com/photo-1678819483347-3faeb1e426c0?auto=format&fit=crop&w=1000&q=82",
+    "img/casaco.svg": "https://images.unsplash.com/photo-1559436194-ec317a4bafeb?auto=format&fit=crop&w=1000&q=82",
+    "img/cadernos.svg": "https://images.unsplash.com/photo-1531346618680-ab17d6dcd07c?auto=format&fit=crop&w=1000&q=82",
+    "img/celular.svg": "https://images.unsplash.com/photo-1563030646-2957db71d197?auto=format&fit=crop&w=1000&q=82",
+    "img/hero-doacao.svg": "https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?auto=format&fit=crop&w=1000&q=82",
+}
+
+
+@app.template_filter("photo_url")
+def photo_url(path):
+    """Resolve fotos do usuário e fotografias dos anúncios de exemplo."""
+    if not path:
+        return ""
+    if path in DEMO_PHOTOS:
+        return DEMO_PHOTOS[path]
+    if path.startswith("https://images.unsplash.com/"):
+        return path
+    return url_for("static", filename=path)
+
+
 def db():
     if "db" not in g:
         DB_PATH.parent.mkdir(parents=True, exist_ok=True)
