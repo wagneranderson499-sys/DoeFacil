@@ -38,6 +38,21 @@
     });
   }));
 
+  // Se a internet estiver indisponível, mostra um aviso discreto,
+  // nunca uma imagem ilustrativa ou um ícone de imagem quebrada.
+  document.querySelectorAll('img[src^="https://images.unsplash.com/"]').forEach(photo => {
+    photo.addEventListener('error', () => {
+      const fallback = document.createElement('div');
+      fallback.className = photo.className + ' photo-unavailable';
+      fallback.setAttribute('role', 'img');
+      fallback.setAttribute('aria-label', 'Fotografia temporariamente indisponível');
+      const caption = document.createElement('small');
+      caption.textContent = 'Fotografia indisponível';
+      fallback.append(caption);
+      photo.replaceWith(fallback);
+    }, { once: true });
+  });
+
   const imageInput = document.getElementById('image');
   const preview = document.getElementById('imagePreview');
   imageInput?.addEventListener('change', () => {
