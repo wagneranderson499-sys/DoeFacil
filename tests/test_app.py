@@ -82,6 +82,22 @@ class DonationWorkflowTests(unittest.TestCase):
         self.register("Ana Oliveira", "ana@teste.local")
         self.assertEqual(self.client.get("/admin").status_code, 403)
 
+    def test_home_uses_real_photos_instead_of_svg_drawings(self):
+        response = self.client.get("/")
+        self.assertEqual(response.status_code, 200)
+        html = response.get_data(as_text=True)
+        self.assertIn("https://images.unsplash.com/photo-", html)
+        self.assertNotIn("hero-doacao.svg", html)
+        self.assertNotIn("img/casaco.svg", html)
+
+    def test_uploaded_user_photo_keeps_local_path(self):
+        with project.app.test_request_context("/"):
+            self.assertEqual(
+                project.photo_url("uploads/foto_usuario.jpg"),
+                "/static/uploads/foto_usuario.jpg",
+            )
+            self.assertIn("images.unsplash.com", project.photo_url("img/urso.svg"))
+
     def test_post_rejects_invalid_csrf(self):
         self.assertEqual(self.client.post("/cadastrar", data={}).status_code, 400)
 
