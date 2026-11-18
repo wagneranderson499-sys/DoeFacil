@@ -1,8 +1,12 @@
+{% macro icon(name, extra_class='') -%}
+<svg class="ui-icon {{ extra_class }}" aria-hidden="true" focusable="false"><use href="{{ url_for('static', filename='img/icons.svg') }}#{{ name }}"></use></svg>
+{%- endmacro %}
+
 {% macro picture(item, extra_class='') -%}
   {% if item['image_path'] %}
     <img class="{{ extra_class }}" src="{{ url_for('static', filename=item['image_path']) }}" alt="Imagem de {{ item['title'] }}" loading="lazy">
   {% else %}
-    <div class="photo-empty {{ extra_class }}"><span>🎁</span><small>Imagem não enviada</small></div>
+    <img class="photo-empty {{ extra_class }}" src="{{ url_for('static', filename='img/item-sem-foto.svg') }}" alt="Foto não enviada para {{ item['title'] }}" loading="lazy">
   {% endif %}
 {%- endmacro %}
 
@@ -16,7 +20,7 @@
       <span class="item-category">{{ item['category'] }}</span>
       <h3><a href="{{ url_for('detail', donation_id=item['id']) }}">{{ item['title'] }}</a></h3>
       <p>{{ item['description']|truncate(80, True, '…') }}</p>
-      <div class="item-foot"><span>⌖ {{ item['city'] }} • {{ item['state'] }}</span><a href="{{ url_for('detail', donation_id=item['id']) }}" aria-label="Ver detalhes de {{ item['title'] }}">↗</a></div>
+      <div class="item-foot"><span>{{ icon('map-pin') }} {{ item['city'] }} • {{ item['state'] }}</span><a href="{{ url_for('detail', donation_id=item['id']) }}" aria-label="Ver detalhes de {{ item['title'] }}">{{ icon('arrow-up-right') }}</a></div>
     </div>
   </article>
 {%- endmacro %}
