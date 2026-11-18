@@ -18,5 +18,5 @@
     <button class="btn btn-primary btn-block btn-lg" type="submit">{{ 'Criar minha conta →' if mode == 'register' else 'Entrar na minha conta →' }}</button>
   </form>
   <p class="auth-switch">{% if mode == 'register' %}Já possui uma conta? <a href="{{ url_for('login') }}">Entrar</a>{% else %}Ainda não tem uma conta? <a href="{{ url_for('register') }}">Cadastre-se gratuitamente</a>{% endif %}</p>
-</section><aside class="auth-art"><img class="auth-art-image" src="{{ url_for('static', filename='img/hero-doacao.svg') }}" alt="Ilustração de objetos sendo doados"><h2>Coisas boas merecem circular.</h2><p>Um item compartilhado pode facilitar o dia, despertar um sorriso e abrir novas possibilidades.</p><div class="auth-art-tag">{{ icon('heart') }} Doe • Conecte • Transforme</div></aside></div>
+</section><aside class="auth-art"><img class="auth-art-image" src="{{ 'img/hero-doacao.svg'|photo_url }}" alt="Fotografia de voluntários organizando doações"><h2>Coisas boas merecem circular.</h2><p>Um item compartilhado pode facilitar o dia, despertar um sorriso e abrir novas possibilidades.</p><div class="auth-art-tag">{{ icon('heart') }} Doe • Conecte • Transforme</div></aside></div>
 {% endblock %}
